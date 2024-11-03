@@ -60,7 +60,7 @@ from gym.utils import seeding
 
 # physics simulator
 import pybullet as p
-import pybullet_data
+import pybullet_data as pd
 from pybullet_utils import bullet_client as bc
 from pkg_resources import parse_version
 
@@ -255,6 +255,9 @@ class RealMegaFufiEnv(gym.Env):
       self._physics_client_id = self._p._client
 
       p = self._p
+        
+      #allow to find the assets (URDF, obj, textures etc)
+      p.setAdditionalSearchPath(pd.getDataPath())
       p.resetSimulation()
 
       ## loading PIPPA in the origin
