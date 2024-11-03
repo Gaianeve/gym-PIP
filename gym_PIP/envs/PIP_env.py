@@ -258,7 +258,7 @@ class RealMegaFufiEnv(gym.Env):
       p.resetSimulation()
 
       ## loading PIPPA in the origin
-      self.pippa_id = load_pippa()
+      self.pippa_id = self.load_pippa()
       self.timeStep = 0.02
       p.setGravity(0, 0, -9.8)
       p.setTimeStep(self.timeStep)
