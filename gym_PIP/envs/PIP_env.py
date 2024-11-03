@@ -347,13 +347,13 @@ class RealMegaFufiEnv(gym.Env):
 
     #apply external forces to the bottom edges of the disk
     p.applyExternalForce(
-        objectUniqueId=self.pippa_id,linkIndex= bottom_link_1_index,forceObj=force_module, \
+        objectUniqueId=self.pippa_id,linkIndex= self.link_name_to_index['Bottom_Link_1'],forceObj=force_module, \
         posObj=position_bottom_1,flags=p.WORLD_FRAME)
     p.applyExternalForce(
-        objectUniqueId=self.pippa_id,linkIndex= bottom_link_2_index,forceObj=force_module,\
+        objectUniqueId=self.pippa_id,linkIndex= self.link_name_to_index['Bottom_Link_2'],forceObj=force_module,\
         posObj=position_bottom_2,flags=p.WORLD_FRAME)
     p.applyExternalForce(
-        objectUniqueId=self.pippa_id,linkIndex= bottom_link_3_index,forceObj=force_module, \
+        objectUniqueId=self.pippa_id,linkIndex= self.link_name_to_index['Bottom_Link_3'],forceObj=force_module, \
         posObj=position_bottom_3,flags=p.WORLD_FRAME)
 
     #calculate next state
