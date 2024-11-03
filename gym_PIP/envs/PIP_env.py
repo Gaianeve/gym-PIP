@@ -86,19 +86,19 @@ class RealMegaFufiEnv(gym.Env):
 
     high = np.array(
         [
-          np.finfo(np.float32).max, np.finfo(np.float32).max, np.finfo(np.float32).max, self.threshold_yaw * 2, #LVDT 1
-          np.finfo(np.float32).max, np.finfo(np.float32).max, np.finfo(np.float32).max, self.threshold_yaw * 2, #LVDT 2
-          np.finfo(np.float32).max, np.finfo(np.float32).max, np.finfo(np.float32).max, self.threshold_yaw * 2, #LVDT 3
+          np.finfo(np.float64).max, np.finfo(np.float64).max, np.finfo(np.float64).max, self.threshold_yaw * 2, #LVDT 1
+          np.finfo(np.float64).max, np.finfo(np.float64).max, np.finfo(np.float64).max, self.threshold_yaw * 2, #LVDT 2
+          np.finfo(np.float64).max, np.finfo(np.float64).max, np.finfo(np.float64).max, self.threshold_yaw * 2, #LVDT 3
         ],
-        dtype=np.float32,
+        dtype=np.float64,
         )
 
-    self.observation_space = spaces.Box(-high, high, dtype=np.float32)
+    self.observation_space = spaces.Box(-high, high, dtype=np.float64)
 
-    action_lim = np.finfo(np.float32).max
+    action_lim = np.finfo(np.float64).max
 
     # force may be applied in the 2 direction of xy plane. Should always be 0 in the z direction
-    self.action_space = spaces.Box(low=-action_lim, high=action_lim, shape=(2,), dtype=np.float32)
+    self.action_space = spaces.Box(low=-action_lim, high=action_lim, shape=(2,), dtype=np.float64)
 
     self.seed()
 
