@@ -143,7 +143,6 @@ class RealMegaFufiEnv(gym.Env):
 
     self.PIPPA_id = p.loadURDF("PIPPA.urdf",basePosition = PIP_position,baseOrientation = PIP_orientation,\
                           useFixedBase=useFixedBase)
-    print(f"pippa_id for environment instance: {self.PIPPA_id}")
 
     #find link names and indexes
     self.link_name_to_index = {p.getBodyInfo(self.PIPPA_id)[0].decode('UTF-8'):-1,}
@@ -152,8 +151,6 @@ class RealMegaFufiEnv(gym.Env):
     for id in range(p.getNumJoints(self.PIPPA_id)):
       name = p.getJointInfo(self.PIPPA_id, id)[12].decode('UTF-8')
       self.link_name_to_index[name] = id
-        
-    print(f"dictionaries of name-index links: {self.link_name_to_index}")
 
     ## ------------------------------------------------------------------------------------------------
     ## define material for PIP link
@@ -262,7 +259,6 @@ class RealMegaFufiEnv(gym.Env):
 
       ## loading PIPPA in the origin
       self.pippa_id = self.load_pippa()
-      print(f"Resetting environment with pippa_id: {self.pippa_id}")
       self.timeStep = 0.02
       p.setGravity(0, 0, -9.8)
       p.setTimeStep(self.timeStep)
@@ -280,7 +276,6 @@ class RealMegaFufiEnv(gym.Env):
 
     #get bottom bars index
     bottom_link_1_index = self.link_name_to_index['Bottom_Link_1']
-    print("index of bottom link:", bottom_link_1_index)
     bottom_link_2_index = self.link_name_to_index['Bottom_Link_2']
     bottom_link_3_index = self.link_name_to_index['Bottom_Link_3']
 
