@@ -374,21 +374,21 @@ class RealMegaFufiEnv(gym.Env):
     self.state = np.array(next_state_list)
 
     #calculate linear and angular distance for termination
-    distance_linear_1 = np.linalg.norm(self.state[0:3] - self.state_rest[0:3])
-    distance_linear_2 = np.linalg.norm(self.state[4:7] - self.state_rest[4:7])
-    distance_linear_3 = np.linalg.norm(self.state[8:11] - self.state_rest[8:11])
+    self.distance_linear_1 = np.linalg.norm(self.state[0:3] - self.state_rest[0:3])
+    self.distance_linear_2 = np.linalg.norm(self.state[4:7] - self.state_rest[4:7])
+    self.distance_linear_3 = np.linalg.norm(self.state[8:11] - self.state_rest[8:11])
 
-    distance_angular_1 = np.abs(self.state[3] - self.state_rest[3])
-    distance_angular_2 = np.abs(self.state[7] - self.state_rest[7])
-    distance_angular_3 = np.abs(self.state[11] - self.state_rest[11])
+    self.distance_angular_1 = np.abs(self.state[3] - self.state_rest[3])
+    self.distance_angular_2 = np.abs(self.state[7] - self.state_rest[7])
+    self.distance_angular_3 = np.abs(self.state[11] - self.state_rest[11])
 
     #check for dones
-    done =  distance_linear_1 > self.threshold_distance \
-                or distance_linear_2 > self.threshold_distance \
-                or distance_linear_3 > self.threshold_distance \
-                or distance_angular_1 > self.threshold_yaw \
-                or distance_angular_2 > self.threshold_yaw \
-                or distance_angular_3 > self.threshold_yaw
+    done =  self.distance_linear_1 > self.threshold_distance \
+                or self.distance_linear_2 > self.threshold_distance \
+                or self.distance_linear_3 > self.threshold_distance \
+                or self.distance_angular_1 > self.threshold_yaw \
+                or self.distance_angular_2 > self.threshold_yaw \
+                or self.distance_angular_3 > self.threshold_yaw
     done = bool(done)
 
     #assign reward
