@@ -52,6 +52,7 @@ import random
 import numpy as np
 import time
 import subprocess
+from typing import Optional, Union
 
 #reinforcement
 import gym
@@ -100,8 +101,6 @@ class RealMegaFufiEnv(gym.Env):
     # force may be applied in the 2 direction of xy plane. Should always be 0 in the z direction
     self.action_space = spaces.Box(low=-action_lim, high=action_lim, shape=(2,), dtype=np.float64)
 
-    self.seed()
-
     # start the bullet physics server and initialize things up
     self.reset()
     self.viewer = None
@@ -109,10 +108,6 @@ class RealMegaFufiEnv(gym.Env):
 
   def _configure(self, display=None):
     self.display = display
-
-  def seed(self, seed=None):
-    self.np_random, seed = seeding.np_random(seed)
-    return [seed]
 
   #load model in pybullet already with material defined
   def load_pippa(self):
@@ -249,7 +244,8 @@ class RealMegaFufiEnv(gym.Env):
 
     return self.PIPPA_id
 
-  def reset(self):
+  def reset(self,*,seed:Optional[int] = None, options: Optional[dict] = None,):
+    super().reset(seed=seed)
     #    print("-----------reset simulation---------------")
     if self._physics_client_id < 0:
       if self._renders:
@@ -259,7 +255,7 @@ class RealMegaFufiEnv(gym.Env):
       self._physics_client_id = self._p._client
 
       p = self._p
-        
+      
       #allow to find the assets (URDF, obj, textures etc)
       p.setAdditionalSearchPath(pd.getDataPath())
       p.resetSimulation()
@@ -294,6 +290,7 @@ class RealMegaFufiEnv(gym.Env):
     position_bottom_3, _ = p.getLinkState(self.pippa_id, bottom_link_3_index)[0:2]
 
     #apply random force to the bottom bars
+    random.seed(seed)
     fx, fy = random.uniform(0, 1), random.uniform(0, 1)
     force_module = np.array([fx,fy,0])
     force_position_1 = position_bottom_1
