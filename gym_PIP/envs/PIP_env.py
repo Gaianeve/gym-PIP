@@ -148,6 +148,7 @@ class RealMegaFufiEnv(gym.Env):
 
     self.PIPPA_id = p.loadURDF("PIPPA.urdf",basePosition = PIP_position,baseOrientation = PIP_orientation,\
                           useFixedBase=useFixedBase)
+    print(f"pippa_id for environment instance: {self.PIPPA_id}")
 
     #find link names and indexes
     self.link_name_to_index = {p.getBodyInfo(self.PIPPA_id)[0].decode('UTF-8'):-1,}
@@ -262,6 +263,7 @@ class RealMegaFufiEnv(gym.Env):
 
       ## loading PIPPA in the origin
       self.pippa_id = self.load_pippa()
+      print(f"Resetting environment with pippa_id: {self.pippa_id}")
       self.timeStep = 0.02
       p.setGravity(0, 0, -9.8)
       p.setTimeStep(self.timeStep)
