@@ -434,6 +434,10 @@ class RealMegaFufiEnv(gym.Env):
   def configure(self, args):
     pass
 
+  def get_distances(self):
+    distances = [self.distance_linear_1, self.distance_linear_2, self.distance_linear_3, self.distance_angular_1, self.distance_angular_2, self.distance_angular_3]
+    return distances
+
   def close(self):
     if self._physics_client_id >= 0:
       self._p.disconnect()
